@@ -1,0 +1,19 @@
+version: 0.1
+# Configuration block mapping GitHub directly to the native CloudFormation engine
+stack_settings:
+  stack_name: clickstream-analytics-infra
+  region: us-east-1 # Change to your target deployment region
+  
+  # Specify that we are deploying HashiCorp Terraform syntax
+  compiler:
+    type: HashiCorp Terraform
+    version: 1.9.8
+
+  # Point to your pre-existing AWS setup links
+  git_source:
+    connection_arn: arn:aws:codeconnections:us-east-1:372303521823:connection/YOUR_CONNECTION_ID
+    repository: javierminoglb/glue-demo
+    branch: main
+
+  # Tell CloudFormation which role has the permission to deploy the main.tf components
+  execution_role_arn: arn:aws:iam::372303521823:role/CloudFormation-Terraform-Deployment-Role
