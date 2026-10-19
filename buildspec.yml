@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing/verifying Terraform..."
+      - yum install -y dnf-plugins-core
+      - dnf config-manager --add-repo https://hashicorp.com
+      - dnf install -y terraform
+      - terraform -version
+  pre_build:
+    commands:
+      - echo "Initializing Terraform..."
+      - terraform init
+  build:
+    commands:
+      - echo "Applying Terraform configuration..."
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+      - echo "Terraform deployment complete."
